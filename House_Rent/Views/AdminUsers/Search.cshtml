@@ -1,0 +1,95 @@
+﻿@model IEnumerable<House_Rent.Models.ViewModel.AdminUser>
+@using House_Rent.Helpers;
+@{
+    Layout = null;
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <span class='fa fa-table'></span> القائمه
+        </h6>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered dataTable" id="searchTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifyOn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifyBy)
+                    </th>
+                    <th>خيارات</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="align-items-center d-flex">
+                                <div class="mr-3" style="position: relative;height: 2.5rem;width: 2.5rem;">
+                                    @*<img class="myImg rounded-circle" style="height: 2.5rem;width: 2.5rem;" onclick="display(this)" src="~/Content/Uploads/Images/Drivers/DriverImages/@item.DriverImage" alt="@item.DriverName">*@
+                                    <img class="img-profile avatar-image rounded-circle" style="height: 2.5rem;width: 2.5rem;" src="@item.UserImage" />
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">@Html.DisplayFor(modelItem => item.Username)</div>
+                                    <div class="small text-gray-500"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td>
+                            @Helper.GetUserName(item.CreatedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifyOn)
+                        </td>
+                        <td>
+                            @Helper.GetUserName(item.ModifyBy)
+                        </td>
+                        <td>
+                            @Html.Raw(HttpUtility.HtmlDecode(Ajax.ActionLink("<i class='fa fa-edit'></i>", "Edit", "AdminUsers", new { Id = item.UserId }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "cpHolder", OnComplete = "$('#cpHolder').show();SetDivFocus('cpHolder');", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-info btn-circle", @title = "تعديل" }).ToString()))
+                            @Html.Raw(HttpUtility.HtmlDecode(Ajax.ActionLink("<i class='fa fa-trash'></i>", "Delete", "AdminUsers", new { Id = item.UserId }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-danger btn-circle delete", @title = "حذف" }).ToString()))
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $().ready(function () {
+        $('#searchTable').DataTable({
+            language: language,
+            responsive: true
+        });
+         $("#searchTable").delegate(".delete", "click", function () {
+            if (!confirm("تاكيد الحذف ؟")) return false;
+        });
+    });
+</script>

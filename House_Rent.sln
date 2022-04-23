@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "House_Rent", "House_Rent\House_Rent.csproj", "{A3C3BFD4-9053-4794-8528-1B79ECD7864C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3C3BFD4-9053-4794-8528-1B79ECD7864C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3C3BFD4-9053-4794-8528-1B79ECD7864C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3C3BFD4-9053-4794-8528-1B79ECD7864C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3C3BFD4-9053-4794-8528-1B79ECD7864C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {534065F2-7316-4C34-9064-A63D3BDC35B5}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ayman97.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = House_Rent\\House_Rent.csproj
+		SccProjectName1 = House_Rent
+		SccLocalPath1 = House_Rent
+	EndGlobalSection
+EndGlobal

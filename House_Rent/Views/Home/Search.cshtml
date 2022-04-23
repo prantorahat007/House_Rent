@@ -1,0 +1,137 @@
+﻿@model IEnumerable<House_Rent.Models.House>
+
+@using House_Rent.Models;
+@{
+    ViewBag.Title = "Search";
+}
+<div class="container content-body">
+
+    @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = "form-a" }))
+    {
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="form-group">
+                    <label for="SearchKey">Keyword</label>
+                    @Html.Editor("SearchKey", new { htmlAttributes = new { @class = "form-control form-control-lg form-control-a" } })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    <label for="HouseTypeID">Type</label>
+                    @Html.DropDownList("HouseTypeID", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    <label for="CityID">City</label>
+                    @Html.DropDownList("CityID", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    <label for="RoomCount">Rooms</label>
+                    @Html.DropDownList("RoomCount", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    <label for="BadeCount">Bades</label>
+                    @Html.DropDownList("BadeCount", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    <label for="BathRoomCount">Bath Room</label>
+                    @Html.DropDownList("BathRoomCount", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    <label for="HousePrice">Price/Day</label>
+                    @Html.DropDownList("HousePrice", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-b">Search Property</button>
+            </div>
+        </div>
+    }
+    <hr />
+    <!--/ Property Grid Star /-->
+    <section class="property-grid grid">
+        <div class="container">
+            <div class="row">
+                @*<div class="col-sm-12">
+                    <div class="grid-option">
+                        <form>
+                            <select class="custom-select">
+                                <option selected>All</option>
+                                <option value="1">New to Old</option>
+                                <option value="2">For Rent</option>
+                                <option value="3">For Sale</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>*@
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="card-box-a card-shadow">
+                                <div class="img-box-a">
+                                    <img style="height: 380px;" src="~/Content/Uploads/Images/Houses/@item.HouseImage" class="img-a img-fluid" alt="" />
+                                </div>
+                                <div class="card-overlay">
+                                    <div class="card-overlay-a-content">
+                                        <div class="card-header-a">
+                                            <h2 class="card-title-a">
+                                                <a href="#">
+                                                    @item.HouseName
+                                                    <br /> @item.HouseAddress
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="card-body-a">
+                                            <div class="price-box d-flex">
+                                                <span class="price-a">rent | $ @item.HousePrice</span>
+                                            </div>
+                                            <a href="/Home/Details/@item.HouseID" class="link-a">
+                                                Click here to view
+                                                <span class="ion-ios-arrow-forward"></span>
+                                            </a>
+                                        </div>
+                                        <div class="card-footer-a">
+                                            <ul class="card-info d-flex justify-content-around">
+                                                <li>
+                                                    <h4 class="card-info-title">City</h4>
+                                                    <span>
+                                                        @item.City.CityName
+                                                        @*<sup>2</sup>*@
+                                                    </span>
+                                                </li>
+                                                @foreach (HouseFeatures houseFeatures in item.HouseFeatures.ToList())
+                                                {
+                                                    <li>
+                                                        <h4 class="card-info-title">@houseFeatures.Feature.FeatureName</h4>
+                                                        <span>@houseFeatures.FeatureValue</span>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+                else
+                {
+                    <b>Not Found</b>
+                }
+            </div>
+        </div>
+    </section>
+    <!--/ Property Grid End /-->
+</div>

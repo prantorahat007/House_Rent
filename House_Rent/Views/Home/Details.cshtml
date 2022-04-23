@@ -1,0 +1,174 @@
+﻿@model House_Rent.Models.House
+@using House_Rent.Models;
+
+@{
+    ViewBag.Title = Model.HouseName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--/ Intro Single star /-->
+        <div class="row"> 
+<section class="intro-single">
+    <div class="container">
+            <div class="col-md-12 col-lg-8">
+                <div class="title-single-box"> 
+                    <h1 class="title-single">@Html.DisplayFor(model => model.HouseName)</h1>
+                    <span class="color-text-a">@Html.DisplayFor(model => model.HouseAddress)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Intro Single End /-->
+<!--/ Property Single Star /-->
+<section class="property-single nav-arrow-b">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="property-single-carousel" class="owl-carousel owl-arrow gallery-property">
+                    <div class="carousel-item-b">
+                        <img src="~/Content/Uploads/Images/Houses/@Model.HouseImage" alt="@Model.HouseImage">
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-md-5 col-lg-4">
+                        <div class="property-price d-flex justify-content-center foo">
+                            <div class="card-header-c d-flex">
+                                <div class="card-box-ico">
+                                    <span class="ion-money">$</span>
+                                </div>
+                                <div class="card-title-c align-self-center">
+                                    <h5 class="title-c">@Html.DisplayFor(model => model.HousePrice)</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="property-summary">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="title-box-d section-t4">
+                                        <h3 class="title-d">Quick Summary</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="summary-list">
+                                <ul class="list">
+                                    <li class="d-flex justify-content-between">
+                                        <strong>@Html.DisplayNameFor(model => model.City.CityName)</strong>
+                                        <span>@Html.DisplayFor(model => model.City.CityName)</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between">
+                                        <strong>@Html.DisplayNameFor(model => model.HouseType.HouseTypeName)</strong>
+                                        <span>@Html.DisplayFor(model => model.HouseType.HouseTypeName)</span>
+                                    </li>
+                                    @foreach (HouseFeatures houseFeatures in Model.HouseFeatures.ToList())
+                                    {
+                                        <li class="d-flex justify-content-between">
+                                            <strong> @houseFeatures.Feature.FeatureName</strong>
+                                            <span>@houseFeatures.FeatureValue</span>
+                                        </li>
+                                    }
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-7 section-md-t3">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="title-box-d">
+                                    <h3 class="title-d">House Description</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="property-description">
+                            <p class="description color-text-a">
+                                @Html.DisplayFor(model => model.HouseDescription)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Agent /-->
+            <div class="col-md-12">
+                <div class="row section-t3">
+                    <div class="col-sm-12">
+                        <div class="title-box-d">
+                            <h3 class="title-d">Contact Agent</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <img src="~/Content/asstes/img/agent-4.jpg" class="img-fluid" />
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="property-agent">
+                            <h4 class="title-agent">Anabella Geller</h4>
+                            <p class="color-text-a">
+                                Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
+                                dui. Quisque velit nisi,
+                                pretium ut lacinia in, elementum id enim.
+                            </p>
+                        </div>
+                    </div>
+                    <!--/ Social media info end /-->
+                    <!--/ Contact start /-->
+
+                    <div class="col-md-12 col-lg-4">
+                        <div class="property-contact">
+                            @using (Html.BeginForm("RequestBooking","Booking",FormMethod.Post))
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="CheckIn" required name="CheckIn" placeholder="CheckIn" class="form-control" />
+                                            <input type="hidden" name="HouseID" id="HouseID" value="@Model.HouseID" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input id="CheckOut" required name="CheckOut" placeholder="CheckOut" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-1">
+                                        <div class="form-group">
+                                            <textarea id="Comment" class="form-control" placeholder="Comment *" name="Comment" cols="45"
+                                                      rows="8" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-a">Request Booking</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <!--/ Contact End /-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+        $('#CheckIn').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            minDate: today,
+            maxDate: function () {
+                return $('#CheckOut').val();
+            }
+        });
+        $('#CheckOut').datepicker({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            minDate: function () {
+                return $('#CheckOut').val();
+            }
+        });
+    </script>
+}

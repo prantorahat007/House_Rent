@@ -1,0 +1,62 @@
+﻿@model House_Rent.Models.ViewModel.HouseSearchVM
+<!--/ Form Search Star /-->
+<div class="box-collapse">
+    <div class="title-box-d">
+        <h3 class="title-d">Search Property</h3>
+    </div>
+    <span class="close-box-collapse right-boxed ion-ios-close"></span>
+    <div class="box-collapse-wrap form">
+        @using(Html.BeginForm("Search", "Home",null, FormMethod.Post, new { @class = "form-a" }))
+        {
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SearchKey)
+                    @Html.EditorFor(model => model.SearchKey, new { htmlAttributes = new { @class = "form-control form-control-lg form-control-a" } })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HouseTypeID)
+                    @Html.DropDownList("HouseTypeID", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CityID)
+                    @Html.DropDownList("CityID", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RoomCount)
+                    @Html.DropDownList("RoomCount", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BadeCount)
+                    @Html.DropDownList("BadeCount", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BathRoomCount)
+                    @Html.DropDownList("BathRoomCount", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HousePrice)
+                    @Html.DropDownList("HousePrice", null, "Any", htmlAttributes: new { @class = "form-control form-control-lg form-control-a" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-b">Search Property</button>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<!--/ Form Search End /-->
+<!--/ Nav Star /-->

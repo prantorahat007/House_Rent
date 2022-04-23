@@ -1,0 +1,101 @@
+﻿@model House_Rent.Models.ViewModel.HouseVM
+@using House_Rent.Models;
+@{
+    ViewBag.Title = "Create";
+}
+<div class="container content-body">
+    <h2>Create</h2>
+    @using (Html.BeginForm("Create", "Houses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.HouseName)
+                    @Html.EditorFor(model => model.HouseName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HouseName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group form-group col-md-6">
+                    @Html.LabelFor(model => model.HouseDescription)
+
+                    @Html.TextAreaFor(model => model.HouseDescription, new { @class = "form-control" } )
+                    @Html.ValidationMessageFor(model => model.HouseDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.HouseAddress)
+                    @Html.EditorFor(model => model.HouseAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HouseAddress, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.HousePrice)
+                    @Html.EditorFor(model => model.HousePrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HousePrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.HouseTypeID)
+                    @Html.DropDownList("HouseTypeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.HouseTypeID, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.CountryID)
+
+                    @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.StateID)
+                    @Html.DropDownList("StateID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.CityID)
+                    @Html.DropDownList("CityID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input id="House_Image" name="House_Image" type="file" class="file" data-browse-on-zone-click="true">
+                </div>
+                <div class="form-group col-md-6">
+
+                    @foreach (Feature feature in ViewBag.Features)
+                    {
+                        <div class="form-group">
+                            <label for="@feature.FeatureID" class="control-label">Number Of @feature.FeatureName</label>
+                            <input type="number" id="FeatureID@(feature.FeatureID)" name="FeatureID@(feature.FeatureID)" class="form-control" />
+                        </div>
+                    }
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

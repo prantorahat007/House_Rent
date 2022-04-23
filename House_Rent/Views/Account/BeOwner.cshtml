@@ -1,0 +1,43 @@
+﻿@model House_Rent.Models.ViewModel.BeOwnerVM
+@using House_Rent.Models;
+@{
+    ViewBag.Title = "Create";
+}
+<div class="container content-body">
+    <h2>Create</h2>
+    @using (Html.BeginForm("BeOwner", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CustomerPassportID)
+                @Html.EditorFor(model => model.CustomerPassportID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerPassportID, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input id="CustomerPassportImage" name="CustomerPassportImage" type="file" class="file" data-browse-on-zone-click="true">
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

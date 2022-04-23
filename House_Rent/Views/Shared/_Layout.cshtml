@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>House Rent - @ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+     
+    <!-- Favicons -->
+    <link href="/Content/asstes/img/favicon.png" rel="icon">
+    <link href="/Content/asstes/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="/Content/asstes/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="/Content/asstes/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Content/asstes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/Content/asstes/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/Content/asstes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/Plugins/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
+    <link href="~/Content/gijgo/combined/gijgo.min.css" rel="stylesheet" />
+    <!-- Main Stylesheet File -->
+    <link href="~/Content/asstes/css/style.css" rel="stylesheet" />
+    <!-- =======================================================
+      Theme Name: EstateAgency
+      Theme URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
+      Author: BootstrapMade.com
+      License: https://bootstrapmade.com/license/
+    ======================================================= -->
+</head>
+
+<body>
+
+    <div class="click-closed"></div>
+    @{
+        Html.RenderAction("SearchPartial", "Home");
+    }
+    <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+        <div class="container">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+                    aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a class="navbar-brand text-brand" href="/">House<span class="color-b"> Rent</span></a>
+            <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo01" aria-expanded="false">
+                <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link @((ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Index")  ? "active" : "")" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @((ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "About")  ? "active" : "")" href="/Home/About">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @((ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Contact")  ? "active" : "")" href="/Home/Contact">Contact</a>
+                    </li>
+
+
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="dropdown pmd-dropdown pmd-user-info ml-auto ">
+                        <a href="javascript:void(0);" class="btn-user media align-items-center " data-toggle="dropdown" data-sidebar="true" aria-expanded="false">
+                            <img class="mr-3 rounded-circle" style="border: 2px #2eca6a solid;" src="~/Content/asstes/img/agent-6.jpg" width="40" height="40" alt="">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+                            <li class="nav-item">@Html.ActionLink(User.Identity.Name, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })</li>
+                            @if (User.IsInRole("Host"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Houses" ? "active" : "")" href="/Houses">My Properties</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Booking" ? "active" : "")" href="/Booking/MyBookings">My Bookings</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+                        </ul>
+                    </div>
+                }
+            }
+
+            <i style="padding-right:20px"></i>
+            <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo01" aria-expanded="false">
+                <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
+
+
+            @if (Request.IsAuthenticated)
+            {
+                if (User.IsInRole("Guest"))
+                {
+                    <a href="/Account/BeOwner" class="btn btn-b-n d-none d-md-block" style="margin-left: 10px;">
+                        Be Owner
+                    </a>
+                }
+            }
+        </div>
+    </nav>
+    <!--/ Nav End /-->
+
+    @RenderBody()
+
+    <!--/ footer Star /-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright-footer">
+                        <p class="copyright color-text-a">
+                            &copy; Copyright
+                            <span class="color-a">EstateAgency</span> All Rights Reserved.
+                        </p>
+                    </div>
+                    <div class="credits">
+                        <!--
+                          All the links in the footer should remain intact.
+                          You can delete the links only if you purchased the pro version.
+                          Licensing information: https://bootstrapmade.com/license/
+                          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=EstateAgency
+                        -->
+                        Designed by <a href="https://bootstrapmade.com/">FMCS Students</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ Footer End /-->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <div id="preloader"></div>
+
+    <!-- JavaScript Libraries -->
+
+    <script src="/Content/asstes/lib/jquery/jquery.min.js"></script>
+    <script src="/Content/asstes/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="/Content/asstes/lib/popper/popper.min.js"></script>
+    <script src="/Content/asstes/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Content/asstes/lib/easing/easing.min.js"></script>
+    <script src="/Content/asstes/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/Content/asstes/lib/scrollreveal/scrollreveal.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="/Content/asstes/contactform/contactform.js"></script>
+    <script src="~/Scripts/fileinput.min.js"></script>
+
+    <script src="~/Scripts/gijgo/combined/gijgo.min.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="~/Content/asstes/js/main.js"></script>
+    <script>if (window.self == window.top) { (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-55234356-4', 'auto'); ga('send', 'pageview'); }</script>
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+    <script>
+        $().ready(function () {
+            $('a').click(function (e) {
+                // uncomment the following line to prove it
+                // e.preventDefault();
+                $(this).closest('ul').find('li').removeClass('active');
+                $(this).closest('li').addClass('active');
+            });
+        });
+    </script>
+</body>
+</html>

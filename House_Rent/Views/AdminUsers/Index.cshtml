@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <span class='fa fa-user-cog'></span> المستخدمين
+        </h6>
+    </div>
+    <div class="card-body">
+        @using (Ajax.BeginForm("Search", "AdminUsers", new { area = "Admin" }, new AjaxOptions { UpdateTargetId = "cpSearch", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnComplete = "SetDivFocus('cpSearch');" }, new { @id = "fromSearch" }))
+        {
+            <div class="form-group">
+                @Html.Label("بحث عام", new { @for = "searchName" })
+                @Html.TextBox("searchName", null, new { @class = "form-control", @placeholder = "...ابحث عن" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span> بحث </button>
+                @Html.Raw(HttpUtility.HtmlDecode(Ajax.ActionLink("<span class='fa fa-plus'></span> اضافة", "AdminUsers", "Create", new AjaxOptions { HttpMethod = "GET", Url = "/Admin/AdminUsers/Create", UpdateTargetId = "cpHolder", OnComplete = "$('#cpHolder').show();SetDivFocus('cpHolder');", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-success" }).ToString()))
+            </div>
+        }
+    </div>
+</div>
+<div id="cpHolder">
+
+</div>
+<div id="cpSearch">
+
+</div>
